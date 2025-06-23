@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Clock, CheckCircle, Target, Eye, Video, BarChart3, ArrowRight } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -38,9 +39,9 @@ const Header = () => {
         </a>
       </nav>
       <div className="flex-1 flex items-center justify-end gap-4 sm:gap-6">
-        <a className="text-sm font-medium hover:underline underline-offset-4 relative top-[1px]" href="#">
-          Sign In
-        </a>
+        <Link className="text-sm font-medium hover:underline underline-offset-4 relative top-[1px]" to="/signup">
+          Sign Up
+        </Link>
         <Button 
           variant="default" 
           className="bg-orange-500 hover:bg-orange-600 text-primary-foreground dark:bg-primary dark:hover:bg-primary/90 dark:text-primary-foreground"
@@ -204,8 +205,8 @@ const CTASection = () => {
               Start Free Pilot Now
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="bg-slate-50 text-slate-900 hover:bg-slate-200 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-200">
-              Schedule Demo
+            <Button size="lg" variant="outline" className="bg-slate-500 text-white border-slate-500 hover:bg-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-600">
+              Schedule Meeting
             </Button>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 pt-4 text-sm text-muted-foreground">
