@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CourtIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff7c1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M4 15l4-4" />
     <path d="M12 21a9 9 0 0 0 9-9" />
     <path d="M20 9l-4 4" />
@@ -54,6 +54,8 @@ export default function LoginPage() {
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -61,13 +63,33 @@ export default function LoginPage() {
 
   const handleRoleSelect = (role: string) => setSelectedRole(role);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: handle sign in logic
+    setError('');
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, role: selectedRole }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        sessionStorage.setItem('token', data.token);
+        if (selectedRole === 'Coach') {
+          navigate('/coach-dashboard');
+        } else {
+          navigate('/player-dashboard');
+        }
+      } else {
+        setError(data.error || 'Login failed');
+      }
+    } catch {
+      setError('Network error');
+    }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-[#181e2a] px-4">
+    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-[#13161c] to-[#20232b] px-4">
       <div className="flex items-center justify-center mt-14 mb-14">
         <CourtIcon className="h-10 w-10 text-white mr-3" />
         <h1 className="text-[2.75rem] font-extrabold text-white">CourtViz.io</h1>
@@ -128,6 +150,7 @@ export default function LoginPage() {
             required
           />
         </div>
+        {error && <div className="text-red-500 text-center mb-2">{error}</div>}
         <button
           type="submit"
           className="w-full py-3 mt-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg shadow-xl transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-orange-400"

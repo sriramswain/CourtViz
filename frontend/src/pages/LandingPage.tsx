@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Clock, CheckCircle, Target, Eye, Video, BarChart3, ArrowRight } from "lucide-react";
+import { Moon, Sun, Clock, CheckCircle, Target, Eye, Video, BarChart3, ArrowRight, MessageCircle } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -159,16 +159,16 @@ const FeaturesSection = () => {
                         </p>
                     </div>
                 </div>
-                <div className="mx-auto grid max-w-5xl items-stretch gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-4 pt-12">
+                <div className="mx-auto grid max-w-7xl items-stretch gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-5 pt-12">
                     <FeatureCard
                         icon={<Target className="h-7 w-7 text-orange-500" />}
                         title="Auto-Tagged Actions"
-                        description="AI instantly identifies and tags every possession with a timestamp and label -- makes, misses, turnovers, rebounds, change of possession, etc..."
+                        description="AI instantly identifies and tags every possession with a timestamp and label -- makes, misses, turnovers, rebounds, change of possession, etc."
                     />
                     <FeatureCard
                         icon={<Eye className="h-7 w-7 text-blue-500" />}
                         title="Set Detection"
-                        description="Automatically recognizes common sets on both offense and defense: Zone, Man, Horns, Spain PnR, Motion Offense, etc. with 99% accuracy."
+                        description="Automatically recognizes common sets on both offense and defense: Zone, Man, Horns, Spain PnR, Motion Offense, etc. with high accuracy."
                     />
                     <FeatureCard
                         icon={<Video className="h-7 w-7 text-green-500" />}
@@ -178,7 +178,12 @@ const FeaturesSection = () => {
                     <FeatureCard
                         icon={<BarChart3 className="h-7 w-7 text-purple-500" />}
                         title="Advanced Analytics"
-                        description="Get detailed breakdowns of tendencies, efficiency by play type, situational analysis, and more."
+                        description="Get detailed breakdowns of players, tendencies, efficiency by play type, situational analysis, and more."
+                    />
+                    <FeatureCard
+                        icon={<MessageCircle className="h-7 w-7 text-cyan-500" />}
+                        title="Collaborative Goal Tracking"
+                        description="Communicate with your team, set collective and individual goals, and monitor progress—all in one place."
                     />
                 </div>
             </div>
@@ -269,8 +274,8 @@ const ThemeToggle = () => {
       size="icon"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
-      <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Sun className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
@@ -278,7 +283,7 @@ const ThemeToggle = () => {
 
 // SVG Icons
 const CourtIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff7c1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 15l4-4" />
         <path d="M12 21a9 9 0 0 0 9-9" />
         <path d="M20 9l-4 4" />
